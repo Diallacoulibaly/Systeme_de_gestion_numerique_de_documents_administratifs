@@ -1,1 +1,0 @@
-# Systeme_de_gestion_numerique_de_documents_administratifs
