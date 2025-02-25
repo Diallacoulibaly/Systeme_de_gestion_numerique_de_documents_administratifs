@@ -44,7 +44,7 @@
                     <div class="clearfix"></div>
 
                     <!-- je charge le menu profile  -->
-                    <?php include('views/composant/sidebar.php'); ?>
+                    <?php include('views/composant/profileMenu.php'); ?>
                     <!-- /menu profile  -->
 
                     <br />
