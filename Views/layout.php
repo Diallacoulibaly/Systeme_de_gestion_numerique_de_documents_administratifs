@@ -64,7 +64,14 @@
             <!-- /top navigation -->
 
             <!-- page content -->
-            <?php include $content; ?>
+            <?php
+            // Afficher dynamiquement la vue demandée
+            if (isset($page)) {
+                include("Views/$page.php");
+            } else {
+                echo "<p>Page introuvable.</p>";
+            }
+            ?>
             <!-- /page content -->
 
             <!-- footer content -->

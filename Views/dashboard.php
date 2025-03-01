@@ -1,3 +1,19 @@
+<!-- <?php
+        /* if (!isset($_SESSION['user'])) {
+    header("Location: index.php?action=login_form");
+    exit;
+}
+
+echo "<h1>Bienvenue " . $_SESSION['user']['nom'] . "</h1>";
+echo "<p>Votre rôle : " . $_SESSION['user']['role'] . "</p>";
+
+if ($_SESSION['user']['role'] == 'admin') {
+    echo "<a href='admin.php'>Accéder à l'administration</a>";
+}
+
+echo "<br><a href='index.php?action=logout'>Déconnexion</a>"; */
+        ?> -->
+
 <div class="right_col" role="main">
     <!-- top tiles -->
     <div class="row" style="display: inline-block;">
