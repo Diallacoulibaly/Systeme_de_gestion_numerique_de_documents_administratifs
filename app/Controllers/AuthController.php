@@ -6,12 +6,12 @@ session_start();
 class AuthController
 {
     private $userModel;
-
+    // connexion a la base
     public function __construct($db)
     {
         $this->userModel = new User($db);
     }
-
+    //fonction pour s'inscrire
     public function register()
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -22,14 +22,14 @@ class AuthController
             $email = $_POST['email'];
             $password = $_POST['password'];
 
-            if ($this->userModel->register($nom, $prenom, $adresse, $telephone, $email, $password)) {
+            if ($this->userModel->register($nom, $prenom, $adresse, $telephone, $email, $password, $role = 'citoyen')) {
                 echo "Inscription réussie ! <a href='index.php?action=login_form'>Se connecter</a>";
             } else {
                 echo "Erreur lors de l'inscription.";
             }
         }
     }
-
+    //fonction pour ce connecter
     public function login()
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -47,7 +47,7 @@ class AuthController
             }
         }
     }
-
+    //fonction pour ce deconnecter
     public function logout()
     {
         session_destroy();

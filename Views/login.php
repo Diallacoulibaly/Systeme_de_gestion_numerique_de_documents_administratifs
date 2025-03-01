@@ -15,7 +15,7 @@
                             required="" />
                     </div>
                     <div>
-                        <button type="submit" class="btn btn-default submit">S'inscrire</button>
+                        <button type="submit" class="btn btn-default submit">Se connecter</button>
                         <a class="reset_pass" href="#">Mot de passe oublier?</a>
                     </div>
 
@@ -29,11 +29,11 @@
                         <div class="clearfix"></div>
                         <br />
 
-                        <!--  <div>
-                            <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
-                            <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 4 template. Privacy and Terms
+                        <div>
+                            <h1><i class="fa fa-edit"></i> IDocsMali!</h1>
+                            <p>©2025 All Rights Reserved. IDocsMali
                             </p>
-                        </div> -->
+                        </div>
                     </div>
                 </form>
             </section>
@@ -53,7 +53,7 @@
                         <input type="text" class="form-control" placeholder="Adrese" name="adresse" required="" />
                     </div>
                     <div>
-                        <input type="text" class="form-control" placeholder="Telephone" name="Telephone" required="" />
+                        <input type="text" class="form-control" placeholder="Telephone" name="telephone" required="" />
                     </div>
                     <div>
                         <input type="email" class="form-control" placeholder="Email" name="email" required="" />
@@ -69,16 +69,16 @@
                     <div class="clearfix"></div>
 
                     <div class="separator">
-                        <p class="change_link">Already a member ?
-                            <a href="#signin" class="to_register"> Log in </a>
+                        <p class="change_link">Vous avez un deja un compte?
+                            <a href="#signin" class="to_register"> Connectez-vous </a>
                         </p>
 
                         <div class="clearfix"></div>
                         <br />
 
                         <div>
-                            <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
-                            <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 4 template. Privacy and Terms
+                            <h1><i class="fa fa-edit"></i> IDocsMali!</h1>
+                            <p>©2025 All Rights Reserved. IDocsMali
                             </p>
                         </div>
                     </div>

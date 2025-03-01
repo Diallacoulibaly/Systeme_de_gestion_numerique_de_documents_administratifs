@@ -11,19 +11,19 @@ class User
         $this->db = $database;
     }
 
-    // Inscription d'un utilisateur avec rôle par défaut "user"
-    public function register($nom, $prenom, $adrese, $telephone, $email, $password, $role = 'Citoyen')
+    // Inscription d'un utilisateur avec rôle par défaut "Citoyen"
+    public function register($nom, $prenom, $adresse, $telephone, $email, $password, $role = 'Citoyen')
     {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $stmt = $this->db->prepare("INSERT INTO user (nom, prenom, adresse, telephone, email, password, role) VALUES (:nom, :prenom, :adresser, :telephone, :email, :password, :role)");
+        $stmt = $this->db->prepare("INSERT INTO user (nom, prenom, adresse, telephone, email, password, role) VALUES (:nom, :prenom, :adresse, :telephone, :email, :password, :role)");
         return $stmt->execute([
             'nom' => $nom,
             'prenom' => $prenom,
-            'adrese' => $adrese,
+            'adresse' => $adresse,
             'telephone' => $telephone,
             'email' => $email,
             'password' => $hashedPassword,
-            'role' => $role
+            'role' => $role = 'citoyen'
         ]);
     }
 
