@@ -22,7 +22,7 @@
     <!-- Custom Theme Style -->
     <link href="public/assets/build/css/custom.min.css" rel="stylesheet">
 </head>
-<body class="login">
+<body style="background-image:url(public/assets/images/);>
     <?php
     // Afficher dynamiquement la vue demandée
     if (isset($page)) {
@@ -32,6 +32,6 @@
     }
     ?>
 
-</body>
+</bod>
 
 </html>

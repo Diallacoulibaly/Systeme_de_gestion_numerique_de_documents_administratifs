@@ -46,13 +46,13 @@ public function register(){
         $mail->isSMTP();                                    
         $mail->Host = 'smtp.gmail.com';                   
         $mail->SMTPAuth = true;                               // Active l'authentification SMTP
-        $mail->Username = 'aliounediallo676@gmail.com';            
-        $mail->Password = '76466734@Ax';  
+        $mail->Username = '@gmail.com';    // metter votre vrai email par contre si votre email contient un double authentification cest impossible
+        $mail->Password = '';  // votre vrai mot de passe 
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;   // Sécuriser la connexion
         $mail->Port = 587;                                    // Port pour STARTTLS
 
         // expediteur et destinataire
-        $mail->setFrom('aliounediallo676@gmail.com', 'GMAIL'); // Adresse de l'administrateur
+        $mail->setFrom('.com', 'GMAIL'); // Adresse de l'administrateur cest a dire votre adresse mail ci dessus au niveau de setFrom(votreadressemail@gmail.com)
         $mail->addAddress($email);                             // Adresse de l'utilisateur qui s'inscrit
         $mail->isHTML(true);                             
         $mail->Subject = $subject;
