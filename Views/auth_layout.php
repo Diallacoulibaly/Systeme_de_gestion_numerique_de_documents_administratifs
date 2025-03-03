@@ -21,11 +21,20 @@
 
     <!-- Custom Theme Style -->
     <link href="public/assets/build/css/custom.min.css" rel="stylesheet">
+<<<<<<< HEAD
     <link rel="stylesheet" href="public/assets/css/style.css">
 
 </head>
 
 <body class="login" style="background-image: url(public/assets/images/inbox.png);">
+=======
+
+    <!-- Pour le nouveau style -->
+    <link href="public/assets/build/css/style.css" rel="stylesheet">
+</head>
+
+<body class="login" style="background-image: url(public/assets/images/denim.jpg);">
+>>>>>>> 6e7aacee603d3fe8571515d56dfd0b703b33ab48
     <?php
     // Afficher dynamiquement la vue demandée
     if (isset($page)) {

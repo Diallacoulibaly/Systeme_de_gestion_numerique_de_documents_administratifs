@@ -42,7 +42,11 @@ class AuthController
                 header("Location: index.php?action=dashboard");
                 exit;
             } else {
+<<<<<<< HEAD
                 header("Location: index.php?action=login_form");
+=======
+                header("Location: index.php?action=register_form");
+>>>>>>> 6e7aacee603d3fe8571515d56dfd0b703b33ab48
                 //echo "Email ou mot de passe incorrect.";
             }
         }
@@ -54,4 +58,8 @@ class AuthController
         header("Location: index.php?action=login_form");
         exit;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 6e7aacee603d3fe8571515d56dfd0b703b33ab48

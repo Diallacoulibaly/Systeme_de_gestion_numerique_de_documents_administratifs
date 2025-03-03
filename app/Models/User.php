@@ -12,7 +12,11 @@ class User
     }
 
     // Inscription d'un utilisateur avec rôle par défaut "Citoyen"
+<<<<<<< HEAD
     public function register($nom, $prenom, $adresse, $telephone, $email, $password, $role)
+=======
+    public function register($nom, $prenom, $adresse, $telephone, $email, $password, $role = 'Citoyen')
+>>>>>>> 6e7aacee603d3fe8571515d56dfd0b703b33ab48
     {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         $stmt = $this->db->prepare("INSERT INTO user (nom, prenom, adresse, telephone, email, password, role) VALUES (:nom, :prenom, :adresse, :telephone, :email, :password, :role)");
@@ -23,7 +27,11 @@ class User
             'telephone' => $telephone,
             'email' => $email,
             'password' => $hashedPassword,
+<<<<<<< HEAD
             'role' => $role,
+=======
+            'role' => $role = 'citoyen'
+>>>>>>> 6e7aacee603d3fe8571515d56dfd0b703b33ab48
         ]);
     }
 
@@ -39,4 +47,8 @@ class User
         }
         return false;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 6e7aacee603d3fe8571515d56dfd0b703b33ab48
