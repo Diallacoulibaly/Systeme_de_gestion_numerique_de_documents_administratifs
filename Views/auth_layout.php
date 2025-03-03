@@ -21,9 +21,11 @@
 
     <!-- Custom Theme Style -->
     <link href="public/assets/build/css/custom.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="public/assets/css/style.css">
+
 </head>
 
-<body class="login">
+<body class="login" style="background-image: url(public/assets/images/inbox.png);">
     <?php
     // Afficher dynamiquement la vue demandée
     if (isset($page)) {
