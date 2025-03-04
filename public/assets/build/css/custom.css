@@ -4012,8 +4012,8 @@ a.hiddenanchor {
   margin: 0px auto;
   margin-top: 5%;
   max-width: 350px;
-  position: relative; }
-
+  position: relative;
+ }
 .registration_form, .login_form {
   position: absolute;
   top: 0px;

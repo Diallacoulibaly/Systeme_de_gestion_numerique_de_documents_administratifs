@@ -22,7 +22,7 @@
     <!-- Custom Theme Style -->
     <link href="public/assets/build/css/custom.min.css" rel="stylesheet">
 </head>
-<body style="background-image:url(public/assets/images/);>
+<body style="background-image:url(public/assets/images/back.jpg); background-size: cover; background-attachment: fixed;>
     <?php
     // Afficher dynamiquement la vue demandée
     if (isset($page)) {

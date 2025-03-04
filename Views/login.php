@@ -1,11 +1,4 @@
-<style>
-   .animate.form.login_form{
-    border: 1px solid black;
-    border-radius: 8px;
-    border-color: transparent;
-    backdrop-filter: blur(20px);
-   }
-</style>
+
 <body>
     <div>
     <a class="hiddenanchor" id="signup"></a>
