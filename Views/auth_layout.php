@@ -21,7 +21,6 @@
 
     <!-- Custom Theme Style -->
     <link href="public/assets/build/css/custom.min.css" rel="stylesheet">
-
     <!-- Pour le nouveau style -->
     <link href="public/assets/build/css/style.css" rel="stylesheet">
 </head>
