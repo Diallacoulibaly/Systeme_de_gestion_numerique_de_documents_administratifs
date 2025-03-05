@@ -27,6 +27,7 @@ if (!isset($_GET['action'])) {
 }
 
 $action = $_GET['action'];
+
 $authPages = ['login_form', 'register_form']; // Pages qui utilisent auth_layout
 
 switch ($action) {
@@ -38,6 +39,12 @@ switch ($action) {
         exit();
     case 'logout':
         $authController->logout();
+        exit();
+    case 'maill':
+        $authController->maill();
+        exit();
+    case 'reeni':
+        $authController->reeni();
         exit();
     case 'register_form':
         $page = "register";

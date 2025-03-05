@@ -42,7 +42,11 @@ class AuthController
                 header("Location: index.php?action=dashboard");
                 exit;
             } else {
-                header("Location: index.php?action=register_form");
+
+                header("Location: index.php?action=login_form");
+
+                // header("Location: index.php?action=register_form");
+
                 //echo "Email ou mot de passe incorrect.";
             }
         }
@@ -54,4 +58,38 @@ class AuthController
         header("Location: index.php?action=login_form");
         exit;
     }
+    //fonction verification de l'email
+    public function maill(){
+        
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $email = $_POST['email'];
+            $user = $this->userModel->maill($email);
+            if ($user) {
+                header("Location: index.php?action=reeni");
+                exit;
+            }else{
+                echo "email incorrecte";
+            }
+        }
+
+    }
+    // fonction réenitialisation 
+    public function reeni(){
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $pass1 = $_POST['pass1'];
+            $pass2 = $_POST['pass2'];
+            if ($pass1 === $pass2) {
+                if ($this->userModel->reeni($pass1)) {
+                    echo "Mot de passe réinitialisé avec succès.";
+                } else {
+                    echo "Mot de passe non réinitialisé.";
+                }
+            } else {
+                echo "Les mots de passe ne correspondent pas.";
+            }
+        } else {
+            include 'views/reeniEmail.php'; 
+        }
+    }
+    
 }
