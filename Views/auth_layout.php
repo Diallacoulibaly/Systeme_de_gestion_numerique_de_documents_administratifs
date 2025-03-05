@@ -29,7 +29,7 @@
         require "Views/$page.php";
     } else {
         echo "<p>Page introuvable.</p>";
-    }
+    }   
     ?>
 
 </bod>
