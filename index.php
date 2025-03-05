@@ -27,6 +27,7 @@ if (!isset($_GET['action'])) {
 }
 
 $action = $_GET['action'];
+
 $authPages = ['login_form', 'register_form']; // Pages qui utilisent auth_layout
 
 switch ($action) {
