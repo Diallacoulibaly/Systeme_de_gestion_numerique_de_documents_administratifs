@@ -25,7 +25,7 @@
     <link href="public/assets/build/css/style.css" rel="stylesheet">
 </head>
 
-<body class="login" style="background-image: url(public/assets/images/denim.jpg);">
+<body class="login" style="background-image: url(public/assets/images/denim.jpg); background-size:cover; background-repeat:no-repeat; background-position:center; margin:0; padding:0; height:100vh;">
     <?php
     // Afficher dynamiquement la vue demandée
     if (isset($page)) {
