@@ -16,7 +16,7 @@
                     </div>
                     <div>
                         <button type="submit" class="btn btn-default submit">Se connecter</button>
-                        <a class="reset_pass" href="Views\verificationEmail.php">Mot de passe oublier?</a>
+                        <a class="reset_pass" href="index.php?action=verifyEmail">Mot de passe oublier?</a>
                     </div>
 
                     <div class="clearfix"></div>

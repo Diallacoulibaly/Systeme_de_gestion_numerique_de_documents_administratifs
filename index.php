@@ -28,7 +28,7 @@ if (!isset($_GET['action'])) {
 
 $action = $_GET['action'];
 
-$authPages = ['login_form', 'register_form']; // Pages qui utilisent auth_layout
+$authPages = ['login_form', 'register_form', 'verifyEmail', 'reeni_page']; // Pages qui utilisent auth_layout
 
 switch ($action) {
     case 'register':
@@ -46,11 +46,19 @@ switch ($action) {
     case 'reeni':
         $authController->reeni();
         exit();
+
+        // Ici on charge les vue et non les action dans le controller
     case 'register_form':
         $page = "register";
         break;
     case 'login_form':
         $page = "login";
+        break;
+    case 'verifyEmail':
+        $page = "verificationEmail";
+        break;
+    case 'reeni_page':
+        $page = "reeniEmail";
         break;
     case 'dashboard':
         if (!isset($_SESSION['user'])) {

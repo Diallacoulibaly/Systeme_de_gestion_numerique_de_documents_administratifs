@@ -59,22 +59,23 @@ class AuthController
         exit;
     }
     //fonction verification de l'email
-    public function maill(){
-        
+    public function maill()
+    {
+
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $email = $_POST['email'];
             $user = $this->userModel->maill($email);
             if ($user) {
                 header("Location: index.php?action=reeni");
                 exit;
-            }else{
+            } else {
                 echo "email incorrecte";
             }
         }
-
     }
     // fonction réenitialisation 
-    public function reeni(){
+    public function reeni()
+    {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $pass1 = $_POST['pass1'];
             $pass2 = $_POST['pass2'];
@@ -88,8 +89,8 @@ class AuthController
                 echo "Les mots de passe ne correspondent pas.";
             }
         } else {
-            include 'views/reeniEmail.php'; 
+            header("Location: index.php?action=reeni_page");
+            //include 'index.php?action=reeni_page';
         }
     }
-    
 }

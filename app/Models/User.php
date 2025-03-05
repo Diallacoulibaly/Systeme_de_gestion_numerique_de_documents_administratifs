@@ -5,6 +5,7 @@ require_once 'config/database.php';
 class User
 {
     private $db;
+    public $emailV;
 
     public function __construct($database)
     {
@@ -46,34 +47,35 @@ class User
         return false;
     }
     // verification du email
-    public function maill($email){
+    public function maill($email)
+    {
+        $emailv = $email;
         $stmt = $this->db->prepare("SELECT * FROM user WHERE email = :email");
         $stmt->execute(['email' => $email]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
-        if($user){
+        if ($user) {
             return $user;
-        }
-        else{
+        } else {
             return false;
         }
-
     }
     // reenitialisation du mot de passe
-    public function reeni($pass1){
-        if(isset($pass1) && !empty($pass1)) {
+    public function reeni($pass1)
+    {
+        if (isset($pass1) && !empty($pass1)) {
             $hashedPassword = password_hash($pass1, PASSWORD_DEFAULT);
-            $email=$_SESSION['user']['email'];
+            $email = $_SESSION['user']['email'];
+
+            exit;
             $stmt = $this->db->prepare("UPDATE user SET password = :password WHERE email = :email");
             $stmt->execute([
                 'password' => $hashedPassword,
-                'email'=>$email
-    
-        ]);
-        return true;
-        }else{
+                'email' => $email
+
+            ]);
+            return true;
+        } else {
             return false;
         }
-
-
     }
 }
