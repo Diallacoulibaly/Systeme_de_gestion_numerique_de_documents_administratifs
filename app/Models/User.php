@@ -12,7 +12,11 @@ class User
     }
 
     // Inscription d'un utilisateur avec rôle par défaut "Citoyen"
+
+
+
     public function register($nom, $prenom, $adresse, $telephone, $email, $password, $role = 'Citoyen')
+
     {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         $stmt = $this->db->prepare("INSERT INTO user (nom, prenom, adresse, telephone, email, password, role) VALUES (:nom, :prenom, :adresse, :telephone, :email, :password, :role)");
@@ -23,7 +27,9 @@ class User
             'telephone' => $telephone,
             'email' => $email,
             'password' => $hashedPassword,
+
             'role' => $role = 'citoyen'
+
         ]);
     }
 
