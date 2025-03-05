@@ -1,0 +1,13 @@
+# Active la réécriture d'URL
+RewriteEngine On
+
+# Définir la base du répertoire (si nécessaire)
+RewriteBase /Système_de_gestion/
+
+# Rediriger toutes les requêtes vers index.php, sauf si le fichier ou le répertoire existe déjà
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Redirige toutes les requêtes vers index.php avec le paramètre 'action'
+RewriteRule ^(.*)$ index.php?action=$1 [QSA,L]
+

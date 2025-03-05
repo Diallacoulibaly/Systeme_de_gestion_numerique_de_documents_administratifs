@@ -39,4 +39,35 @@ class User
         }
         return false;
     }
+    // verification du email
+    public function maill($email){
+        $stmt = $this->db->prepare("SELECT * FROM user WHERE email = :email");
+        $stmt->execute(['email' => $email]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($user){
+            return $user;
+        }
+        else{
+            return false;
+        }
+
+    }
+    // reenitialisation du mot de passe
+    public function reeni($pass1){
+        if(isset($pass1) && !empty($pass1)) {
+            $hashedPassword = password_hash($pass1, PASSWORD_DEFAULT);
+            $email=$_SESSION['user']['email'];
+            $stmt = $this->db->prepare("UPDATE user SET password = :password WHERE email = :email");
+            $stmt->execute([
+                'password' => $hashedPassword,
+                'email'=>$email
+    
+        ]);
+        return true;
+        }else{
+            return false;
+        }
+
+
+    }
 }

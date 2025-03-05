@@ -39,6 +39,12 @@ switch ($action) {
     case 'logout':
         $authController->logout();
         exit();
+    case 'maill':
+        $authController->maill();
+        exit();
+    case 'reeni':
+        $authController->reeni();
+        exit();
     case 'register_form':
         $page = "register";
         break;
