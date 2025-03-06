@@ -79,6 +79,7 @@ class AuthController
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $pass1 = $_POST['pass1'];
             $pass2 = $_POST['pass2'];
+
             if ($pass1 === $pass2) {
                 if ($this->userModel->reeni($pass1)) {
                     echo "Mot de passe réinitialisé avec succès.";

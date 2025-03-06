@@ -59,20 +59,26 @@ class User
             return false;
         }
     }
-    // reenitialisation du mot de passe
+    // Réinitialisation du mot de passe
     public function reeni($pass1)
     {
+        //session_start(); // Démarrer la session
+
         if (isset($pass1) && !empty($pass1)) {
+            if (!isset($_SESSION['user']['email'])) {
+                return false; // Empeche l'exécution si l'email n'est pas défini
+            }
+
             $hashedPassword = password_hash($pass1, PASSWORD_DEFAULT);
             $email = $_SESSION['user']['email'];
 
-            exit;
+            // Préparation et exécution de la requête SQL
             $stmt = $this->db->prepare("UPDATE user SET password = :password WHERE email = :email");
             $stmt->execute([
                 'password' => $hashedPassword,
                 'email' => $email
-
             ]);
+
             return true;
         } else {
             return false;
