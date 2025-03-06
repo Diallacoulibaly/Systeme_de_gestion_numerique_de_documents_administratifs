@@ -15,8 +15,10 @@ class AuthController
     // connexion a la base
     public function __construct($db)
     {
-        $this->userModel = new User($db);}
-public function register(){
+        $this->userModel = new User($db);
+    }
+    public function register()
+    {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $nom = $_POST['nom'];
             $prenom = $_POST['prenom'];
@@ -26,58 +28,65 @@ public function register(){
             $password = $_POST['password'];
             $verifieToken = bin2hex(random_bytes(32));
 
-            if ($this->userModel->register($nom, $prenom, $adresse, $telephone, $email, $password,$verifieToken)) {
-                $this->envoyerConfirmationEmail($email,$verifieToken);
-                echo "Inscription réussie réussie avec succès un email de confirmation a été envoyé";
+            if ($this->userModel->register($nom, $prenom, $adresse, $telephone, $email, $password, $verifieToken)) {
+                $this->envoyerConfirmationEmail($email, $verifieToken);
+                // Message de succès et redirection vers la page de connexion
+                $_SESSION['message'] = 'Inscription réussie. Un email de confirmation a été envoyé.';
+                header("Location: index.php?action=login_form");
+                exit;
             } else {
-                echo "Erreur lors de l'inscription.";
-            }
+                // Message d'erreur et redirection vers le formulaire d'inscription
+                $_SESSION['message'] = 'Erreur lors de l\'inscription. Veuillez réessayer.';
+                header("Location: index.php?action=register_form");
+                exit;
             }
         }
+    }
     //fonction pour envoyer l'email de confirmation
-    private function envoyerConfirmationEmail($email,$verifieToken){
+    private function envoyerConfirmationEmail($email, $verifieToken)
+    {
         $subject = "Confirmation de votre inscription";
-        $confirmationLien = "http://localhost/Systeme_de_gestion_numerique_de_documents_administratifs-main/index.php?action=confirm&token=" .$verifieToken;
+        $confirmationLien = "http://localhost/Systeme_de_gestion_numerique_de_documents_administratifs-main/index.php?action=confirm&token=" . $verifieToken;
         $message =  "Cliquez sur ce lien pour confirmer votre inscription : $confirmationLien";
         // appelle le phpMailer
         $mail = new PHPMailer;
 
         // parametre du  serveur SMTP de Gmail
-        $mail->isSMTP();                                    
-        $mail->Host = 'smtp.gmail.com';                   
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;                               // Active l'authentification SMTP
-        $mail->Username = '@gmail.com';    // metter votre vrai email par contre si votre email contient un double authentification cest impossible
-        $mail->Password = '';  // votre vrai mot de passe 
+        $mail->Username = 'aboubacarbagayoko2000@gmail.com';    // metter votre vrai email par contre si votre email contient un double authentification cest impossible
+        $mail->Password = 'qhotmfmrujjuhwrr';  // votre vrai mot de passe 
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;   // Sécuriser la connexion
         $mail->Port = 587;                                    // Port pour STARTTLS
 
         // expediteur et destinataire
-        $mail->setFrom('.com', 'GMAIL'); // Adresse de l'administrateur cest a dire votre adresse mail ci dessus au niveau de setFrom(votreadressemail@gmail.com)
+        $mail->setFrom('aboubacarbagayoko2000@gmail.com', 'GMAIL'); // Adresse de l'administrateur cest a dire votre adresse mail ci dessus au niveau de setFrom(votreadressemail@gmail.com)
         $mail->addAddress($email);                             // Adresse de l'utilisateur qui s'inscrit
-        $mail->isHTML(true);                             
+        $mail->isHTML(true);
         $mail->Subject = $subject;
         $mail->Body    = $message;
 
         // Envoi de l'email
-        if(!$mail->send()) {
+        if (!$mail->send()) {
             echo 'L\'email n\'a pas pu être envoyé.';
             echo 'Erreur: ' . $mail->ErrorInfo;
         } else {
             echo 'Un email de confirmation a été envoyé.';
         }
     }
-//fonction pour confirmer L'inscription
-public function confirm(){
-        if(isset($_GET['verifieToken'])){
+    //fonction pour confirmer L'inscription
+    public function confirm()
+    {
+        if (isset($_GET['verifieToken'])) {
             $verifieToken = $_GET['verifieToken'];
-            if($this->userModel->confirmUser($verifieToken)){
+            if ($this->userModel->confirmUser($verifieToken)) {
                 echo "Votre compte a été activé avec succès ! <a href='index.php?action=login_form'>Se connecter</a>";
             } else {
                 echo "Lien invalide ou compte déjà activé.";
             }
-
-            }
         }
+    }
     //fonction pour ce connecter
     public function login()
     {

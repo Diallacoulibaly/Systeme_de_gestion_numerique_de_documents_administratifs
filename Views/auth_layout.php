@@ -21,17 +21,20 @@
 
     <!-- Custom Theme Style -->
     <link href="public/assets/build/css/custom.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="public/assets/css/style.css">
 </head>
-<body style="background-image:url(public/assets/images/back.jpg); background-size: cover; background-attachment: fixed;>
+
+<body
+    style="background-image:url(public/assets/images/back.jpg); background-size: cover; background-attachment: fixed;">
     <?php
     // Afficher dynamiquement la vue demandée
     if (isset($page)) {
         require "Views/$page.php";
     } else {
         echo "<p>Page introuvable.</p>";
-    }   
+    }
     ?>
 
-</bod>
+</body>
 
 </html>
