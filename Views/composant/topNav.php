@@ -12,7 +12,7 @@
                         <img src="public/assets/images/img.jpg" alt=""><?php echo $_SESSION['user']['nom']; ?>
                     </a>
                     <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="javascript:;"> Profile</a>
+                        <a class="dropdown-item" href="index.php?action=userProfil"> Profile</a>
                         <a class="dropdown-item" href="javascript:;">
                             <span class="badge bg-red pull-right">50%</span>
                             <span>Settings</span>

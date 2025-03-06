@@ -31,7 +31,7 @@
     <link href="public/assets/build/css/custom.min.css" rel="stylesheet">
 
     <!-- Pour le nouveau style -->
-    <link href="public/assets/build/css/style.css" rel="stylesheet">
+    <!-- <link href="public/assets/build/css/style.css" rel="stylesheet"> -->
 </head>
 
 <body class="nav-md">
@@ -40,7 +40,8 @@
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="index.html" class="site_title"><i class="glyphicon glyphicon-leaf"></i> <span>IDocsMali
+                        <a href="index.php?action=dashboard" class="site_title"><i class="glyphicon glyphicon-leaf"></i>
+                            <span>IDocsMali
                             </span></a>
                     </div>
 
@@ -125,6 +126,10 @@
 
     <!-- Custom Theme Scripts -->
     <script src="public/assets/build/js/custom.min.js"></script>
+
+    <!-- morris.js -->
+    <script src="public/assets/vendors/raphael/raphael.min.js"></script>
+    <script src="public/assets/vendors/morris.js/morris.min.js"></script>
 
 </body>
 

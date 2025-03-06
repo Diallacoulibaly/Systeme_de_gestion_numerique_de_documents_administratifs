@@ -65,15 +65,15 @@ class AuthController
         // parametre du  serveur SMTP de Gmail
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
-        $mail->SMTPAuth = true;                               // Active l'authentification SMTP
-        $mail->Username = 'aboubacarbagayoko2000@gmail.com';    // metter votre vrai email par contre si votre email contient un double authentification cest impossible
-        $mail->Password = 'qhotmfmrujjuhwrr';  // votre vrai mot de passe 
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;   // Sécuriser la connexion
-        $mail->Port = 587;                                    // Port pour STARTTLS
+        $mail->SMTPAuth = true;
+        $mail->Username = 'aboubacarbagayoko2000@gmail.com';
+        $mail->Password = 'qhotmfmrujjuhwrr';
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port = 587;
 
         // expediteur et destinataire
-        $mail->setFrom('aboubacarbagayoko2000@gmail.com', 'GMAIL'); // Adresse de l'administrateur cest a dire votre adresse mail ci dessus au niveau de setFrom(votreadressemail@gmail.com)
-        $mail->addAddress($email);                             // Adresse de l'utilisateur qui s'inscrit
+        $mail->setFrom('aboubacarbagayoko2000@gmail.com', 'GMAIL');
+        $mail->addAddress($email);
         $mail->isHTML(true);
         $mail->Subject = $subject;
         $mail->Body    = $message;

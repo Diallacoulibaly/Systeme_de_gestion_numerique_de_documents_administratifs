@@ -50,6 +50,9 @@ switch ($action) {
         exit();
 
         // Ici on charge les vue et non les action dans le controller
+    case 'userProfil':
+        $page = "user/profil";
+        break;
     case 'register_form':
         $page = "register";
         break;
