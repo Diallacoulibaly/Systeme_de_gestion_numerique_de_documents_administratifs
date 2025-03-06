@@ -21,11 +21,13 @@
 
     <!-- Custom Theme Style -->
     <link href="public/assets/build/css/custom.min.css" rel="stylesheet">
-    <!-- Pour le nouveau style -->
-    <link href="public/assets/build/css/style.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="public/assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="public/assets/build/css/style.css">
 </head>
 
-<body class="login" style="background-image: url(public/assets/images/denim.jpg); background-size:cover; background-repeat:no-repeat; background-position:center; margin:0; padding:0; height:100vh;">
+<body
+    style="background-image:url(public/assets/images/back.jpg); background-size: cover; background-attachment: fixed;">
     <?php
     // Afficher dynamiquement la vue demandée
     if (isset($page)) {

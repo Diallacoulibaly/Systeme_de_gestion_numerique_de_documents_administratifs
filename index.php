@@ -30,6 +30,7 @@ $action = $_GET['action'];
 
 $authPages = ['login_form', 'register_form', 'verifyEmail', 'reeni_page']; // Pages qui utilisent auth_layout
 
+
 switch ($action) {
     case 'register':
         $authController->register();
@@ -40,6 +41,7 @@ switch ($action) {
     case 'logout':
         $authController->logout();
         exit();
+
     case 'maill':
         $authController->maill();
         exit();

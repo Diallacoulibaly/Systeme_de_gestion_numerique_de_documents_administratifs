@@ -29,11 +29,9 @@
 
     <!-- Custom Theme Style -->
     <link href="public/assets/build/css/custom.min.css" rel="stylesheet">
-<<<<<<< HEAD
-=======
+
     <!-- Pour le nouveau style -->
     <link href="public/assets/build/css/style.css" rel="stylesheet">
->>>>>>> 6e7aacee603d3fe8571515d56dfd0b703b33ab48
 </head>
 
 <body class="nav-md">
