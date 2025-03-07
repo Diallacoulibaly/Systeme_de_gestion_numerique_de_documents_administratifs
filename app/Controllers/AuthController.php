@@ -111,12 +111,7 @@ class AuthController
 
             if ($user && password_verify($password, $user['mot_de_passe'])) {
                 // Stocker l'utilisateur en session
-                $_SESSION['user'] = [
-                    'id' => $user['id'],
-                    'nom' => $user['nom'],
-                    'email' => $user['email'],
-                    'role' => $user['role']
-                ];
+                $_SESSION['user'] = $user;
                 header("Location: index.php?action=dashboard");
                 exit();
             } else {

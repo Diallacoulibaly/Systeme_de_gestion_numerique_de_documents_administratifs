@@ -16,7 +16,7 @@ require_once 'app/Controllers/AuthController.php';
 $authController = new AuthController();
 // Récupérer l'action depuis l'URL
 $action = isset($_GET['action']) ? $_GET['action'] : 'login_form';
-
+//var_dump($action);
 // Pages nécessitant le layout d'authentification
 $authPages = ['login_form', 'register_form', "verifyEmail", 'reeni_page'];
 
@@ -34,9 +34,9 @@ switch ($action) {
         $authController->logout();
         exit();
 
-    case "verifyEmail":
+        /* case "verifyEmail":
         $authController->verifyEmail();
-        exit();
+        exit(); */
 
     case 'reset_password_request':
         $authController->resetPasswordRequest();
