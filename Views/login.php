@@ -1,3 +1,10 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+?>
+
+
 <div>
     <a class="hiddenanchor" id="signup"></a>
     <a class="hiddenanchor" id="signin"></a>
@@ -8,7 +15,8 @@
                 <form action="index.php?action=login" method="post">
                     <h1>Formulaire de connexion</h1>
                     <div>
-                        <input type="email" name="email" class="form-control" placeholder="Votre email" required="" />
+                        <input type="email" name="email" class="form-control" placeholder="Votre email" required=""
+                            value="" />
                     </div>
                     <div>
                         <input type="password" name="password" class="form-control" placeholder="Password"
@@ -43,20 +51,26 @@
             <section class="login_content">
                 <form action="index.php?action=register" method="post">
                     <h1>Creer un compte</h1>
+                    <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                     <div>
-                        <input type="text" class="form-control" placeholder="Nom" name="nom" required="" />
+                        <input type="text" class="form-control" placeholder="Nom" name="nom" required=""
+                            value="<?php echo isset($_SESSION['nom']) ? $_SESSION['nom'] : ''; ?>" />
                     </div>
                     <div>
-                        <input type="text" class="form-control" placeholder="Prenom" name="prenom" required="" />
+                        <input type="text" class="form-control" placeholder="Prenom" name="prenom" required=""
+                            value="<?php echo isset($_SESSION['prenom']) ? $_SESSION['prenom'] : ''; ?>" />
                     </div>
                     <div>
-                        <input type="text" class="form-control" placeholder="Adrese" name="adresse" required="" />
+                        <input type="text" class="form-control" placeholder="Adresse" name="adresse" required=""
+                            value="<?php echo isset($_SESSION['adresse']) ? $_SESSION['adresse'] : ''; ?>" />
                     </div>
                     <div>
-                        <input type="text" class="form-control" placeholder="Telephone" name="telephone" required="" />
+                        <input type="text" class="form-control" placeholder="Telephone" name="telephone" required=""
+                            value="<?php echo isset($_SESSION['telephone']) ? $_SESSION['telephone'] : ''; ?>" />
                     </div>
                     <div>
-                        <input type="email" class="form-control" placeholder="Email" name="email" required="" />
+                        <input type="email" class="form-control" placeholder="Email" name="email" required=""
+                            value="<?php echo isset($_SESSION['email']) ? $_SESSION['email'] : ''; ?>" />
                     </div>
                     <div>
                         <input type="password" class="form-control" placeholder="Password" name="password"
@@ -88,13 +102,31 @@
     </div>
 </div>
 
-<?php
-if (isset($_SESSION['message'])) {
-    $messageClass = (strpos($_SESSION['message'], 'réussi') !== false) ? 'success' : 'error';
-    echo "<div class='$messageClass'>" . $_SESSION['message'] . "</div>";
-    unset($_SESSION['message']);
-}
-?>
+
+
+<?php if (isset($_SESSION['error'])): ?>
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: '<?php echo $_SESSION['error']; ?>'
+        });
+    </script>
+    <?php unset($_SESSION['error']); ?>
+<?php endif; ?>
+
+<?php if (isset($_SESSION['success'])): ?>
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Succès !',
+            text: '<?php echo $_SESSION['success']; ?>'
+        });
+    </script>
+    <?php unset($_SESSION['success']); ?>
+<?php endif; ?>
+
+
 
 
 

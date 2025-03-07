@@ -6,7 +6,9 @@ if (isset($_SESSION['user']) && (!isset($_GET['action']) || $_GET['action'] == '
     header("Location: index.php?action=dashboard");
     exit();
 }
-
+if (isset($_GET['action'])) {
+    $action = $_GET['action'];
+}
 // Inclure les dépendances principales
 require_once 'config/database.php';
 require_once 'core/Router.php';
@@ -33,20 +35,23 @@ switch ($action) {
     case 'logout':
         $authController->logout();
         exit();
+    case 'verifyEmail':
+        $authController->verifyEmail();
+        break;
 
-        /* case "verifyEmail":
+    /* case "verifyEmail":
         $authController->verifyEmail();
         exit(); */
 
-    case 'reset_password_request':
+    /* case 'reset_password_request':
         $authController->resetPasswordRequest();
         exit();
 
     case 'reset_password':
         $authController->resetPassword();
-        exit();
+        exit(); */
 
-        // Pages affichées directement
+    // Pages affichées directement
     case 'userProfil':
         $page = "user/profil";
         break;

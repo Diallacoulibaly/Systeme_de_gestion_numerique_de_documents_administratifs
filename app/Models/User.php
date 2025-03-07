@@ -16,11 +16,24 @@ class User
         return $stmt->execute([$nom, $prenom, $adresse, $telephone, $email, $password, $token]);
     }
 
+
+    // Méthode pour récupérer un utilisateur avec un token spécifique
+    public function getUserByToken($token)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM user WHERE verifieToken = :token");
+        $stmt->bindParam(':token', $token, PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    // Méthode pour activer un utilisateur en mettant à jour son statut
     public function verifyUser($token)
     {
-        $stmt = $this->db->prepare("UPDATE user SET email_verifie = 1, verifieToken = NULL WHERE verifieToken = ?");
-        return $stmt->execute([$token]);
+        $stmt = $this->db->prepare("UPDATE user SET email_verifie = 1, verifieToken = NULL WHERE verifieToken = :token");
+        $stmt->bindParam(':token', $token, PDO::PARAM_STR);
+        return $stmt->execute();
     }
+
 
     public function emailExists($email)
     {
