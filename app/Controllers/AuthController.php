@@ -15,10 +15,10 @@ class AuthController
 
         // Vérifier si le token CSRF n'existe pas déjà, sinon on en génère un
         if (!isset($_SESSION['csrf_token'])) {
-            $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); // Génère un token unique
+            $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
         }
     }
-
+    //Les fonction pour valider la saisi de utilisateur
     private function filtrageEntrer($input)
     {
         return htmlspecialchars(strip_tags(trim($input)), ENT_QUOTES, 'UTF-8');
@@ -28,6 +28,8 @@ class AuthController
     {
         return filter_var($email, FILTER_VALIDATE_EMAIL);
     }
+
+    // La fonction pour l'inscription
 
     public function register()
     {
@@ -39,7 +41,7 @@ class AuthController
                 exit();
             }
 
-            // Filtrage des entrées utilisateur pour avoir le bon format
+            // Filtrage des entrées utilisateur 
             $nom = $this->filtrageEntrer($_POST['nom']);
             $prenom = $this->filtrageEntrer($_POST['prenom']);
             $adresse = $this->filtrageEntrer($_POST['adresse']);
@@ -50,7 +52,7 @@ class AuthController
 
 
 
-            // Vérifications pour valider la saisi de l'utilisateur
+            // Vérifications de email de l'utilisateur
             if (!$this->validateEmail($email)) {
                 $_SESSION['error'] = "Email invalide.";
                 header("Location: index.php?action=login_form#signup");
@@ -92,7 +94,7 @@ class AuthController
                 $link = BASE_URL . "action=verifyEmail&token=" . urlencode($token);
                 $body = "Cliquez ici pour vérifier votre email : <a href='$link'>$link</a>";
 
-                if (Mail::sendMail($email, "Vérification d'email", $body)) {
+                if (Mail::sendMail($email, "Verification d'email", $body)) {
                     $_SESSION['success'] = "Un email de confirmation vous a été envoyé.";
                 } else {
                     $_SESSION['error'] = "Échec de l'envoi de l'email.";
@@ -127,7 +129,7 @@ class AuthController
             $_SESSION['error'] = "Aucun token fourni.";
         }
 
-        // Rediriger l'utilisateur vers la page de connexion ou une page de succès
+        // Rediriger l'utilisateur vers la page de connexion
         header("Location: index.php?action=login_form");
         exit();
     }
@@ -169,7 +171,85 @@ class AuthController
         }
     }
 
-    // La founction pour modifier un utilisateur
+    //fonction pour renitialiser le mot de passe
+
+    public function resetPasswordRequest()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $email = trim($_POST['email']);
+
+            // Vérifier si l'utilisateur existe
+            $user = $this->userModel->getUserByEmail($email);
+            if (!$user) {
+                $_SESSION['error'] = "Aucun compte trouvé avec cet email.";
+                header("Location: index.php?action=emailVerifyForm");
+                exit();
+            }
+
+            // Générer un token sécurisé
+            $token = bin2hex(random_bytes(50));
+            $this->userModel->storeResetToken($email, $token);
+
+            // Construire le lien de réinitialisation
+            $resetLink = BASE_URL . "action=reeni_page&token=" . urlencode($token);
+
+            // Envoyer l'email
+            $subject = "Renitialisation de votre mot de passe";
+            $body = "Cliquez sur le lien suivant pour reinitialiser votre mot de passe : <a href='$resetLink'>$resetLink</a>";
+            if (Mail::sendMail($email, $subject, $body)) {
+                $_SESSION['success'] = "Un email de réinitialisation a été envoyé.";
+            } else {
+                $_SESSION['error'] = "Erreur lors de l'envoi de l'email.";
+            }
+
+            header("Location: index.php?action=login_form");
+            exit();
+        }
+    }
+
+    public function resetPassword()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $token = trim($_POST['token']);
+            $password = $_POST['password'];
+            $confirmPassword = $_POST['confirmPassword'];
+            if ($password !== $confirmPassword) {
+                $_SESSION['error'] = "Les mots de passe ne correspondent pas.";
+                header("Location: index.php?action=reeni_page&token=" . urlencode($token));
+                exit();
+            }
+
+            if (strlen($password) < 8) {
+                $_SESSION['error'] = "Le mot de passe doit contenir au moins 8 caractères.";
+                header("Location: index.php?action=reeni_page&token=" . urlencode($token));
+                exit();
+            }
+
+            // Vérifier si le token est valide et récupérer l'email
+            $user = $this->userModel->getUserByToken($token);
+            if (!$user['email']) {
+                $_SESSION['error'] = "Lien de réinitialisation invalide ou expiré.";
+                header("Location: index.php?action=login_form");
+                exit();
+            }
+
+            // Mettre à jour le mot de passe
+            $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+            if ($this->userModel->updatePassword($token, $hashedPassword)) {
+                $_SESSION['success'] = "Mot de passe mis à jour avec succès.";
+                $this->userModel->deleteResetToken($user['email']);
+            } else {
+                $_SESSION['error'] = "Erreur lors de la mise à jour du mot de passe.";
+            }
+
+            header("Location: index.php?action=login_form");
+            exit();
+        }
+    }
+
+
+
+    // La founction pour modifier le profil un utilisateur
 
     public function updateProfile()
     {
@@ -230,10 +310,9 @@ class AuthController
             exit();
         }
     }
-
+    // fonction pour ce deconnecter
     public function logout()
     {
-        session_start();
         session_destroy();
         header("Location: index.php?action=login_form");
         exit();

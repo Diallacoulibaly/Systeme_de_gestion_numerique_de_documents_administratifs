@@ -14,6 +14,7 @@ if (session_status() == PHP_SESSION_NONE) {
             <section class="login_content">
                 <form action="index.php?action=login" method="post">
                     <h1>Formulaire de connexion</h1>
+                    <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                     <div>
                         <input type="email" name="email" class="form-control" placeholder="Votre email" required=""
                             value="" />
@@ -24,7 +25,7 @@ if (session_status() == PHP_SESSION_NONE) {
                     </div>
                     <div>
                         <button type="submit" class="btn btn-default submit">Se connecter</button>
-                        <a class="reset_pass" href="index.php?action=verifyEmail">Mot de passe oublier?</a>
+                        <a class="reset_pass" href="index.php?action=emailVerifyForm">Mot de passe oublier?</a>
                     </div>
 
                     <div class="clearfix"></div>
@@ -105,25 +106,25 @@ if (session_status() == PHP_SESSION_NONE) {
 
 
 <?php if (isset($_SESSION['error'])): ?>
-    <script>
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: '<?php echo $_SESSION['error']; ?>'
-        });
-    </script>
-    <?php unset($_SESSION['error']); ?>
+<script>
+Swal.fire({
+    icon: 'error',
+    title: 'Oops...',
+    text: '<?php echo $_SESSION['error']; ?>'
+});
+</script>
+<?php unset($_SESSION['error']); ?>
 <?php endif; ?>
 
 <?php if (isset($_SESSION['success'])): ?>
-    <script>
-        Swal.fire({
-            icon: 'success',
-            title: 'Succès !',
-            text: '<?php echo $_SESSION['success']; ?>'
-        });
-    </script>
-    <?php unset($_SESSION['success']); ?>
+<script>
+Swal.fire({
+    icon: 'success',
+    title: 'Succès !',
+    text: '<?php echo $_SESSION['success']; ?>'
+});
+</script>
+<?php unset($_SESSION['success']); ?>
 <?php endif; ?>
 
 

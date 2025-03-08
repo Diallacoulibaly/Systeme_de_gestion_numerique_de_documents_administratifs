@@ -1,14 +1,12 @@
 <?php
 session_start();
 
-// Vérifier si un utilisateur est déjà connecté et veut accéder au dashboard
+// Redirection automatique vers le dashboard si l'utilisateur est connecté
 if (isset($_SESSION['user']) && (!isset($_GET['action']) || $_GET['action'] == 'login_form')) {
     header("Location: index.php?action=dashboard");
     exit();
 }
-if (isset($_GET['action'])) {
-    $action = $_GET['action'];
-}
+
 // Inclure les dépendances principales
 require_once 'config/database.php';
 require_once 'core/Router.php';
@@ -16,57 +14,56 @@ require_once 'app/Controllers/AuthController.php';
 
 // Initialisation du contrôleur d'authentification
 $authController = new AuthController();
-// Récupérer l'action depuis l'URL
-$action = isset($_GET['action']) ? $_GET['action'] : 'login_form';
-//var_dump($action);
-// Pages nécessitant le layout d'authentification
-$authPages = ['login_form', 'register_form', "verifyEmail", 'reeni_page'];
 
-// Gestion des actions et des vues
+// Récupérer l'action depuis l'URL
+$action = $_GET['action'] ?? 'login_form';
+
+// Pages nécessitant le layout d'authentification
+$authPages = ['login_form', 'reset_password', "emailVerifyForm", 'reeni_page'];
+
+// Gestion des routes
 switch ($action) {
-    case 'register':
-        $authController->register();
-        exit();
 
     case 'login':
         $authController->login();
+        exit();
+    case 'register':
+        $authController->register();
         exit();
 
     case 'logout':
         $authController->logout();
         exit();
-    case 'verifyEmail':
-        $authController->verifyEmail();
-        break;
 
-    /* case "verifyEmail":
-        $authController->verifyEmail();
-        exit(); */
-
-    /* case 'reset_password_request':
+    case 'emailVerify':
         $authController->resetPasswordRequest();
         exit();
 
     case 'reset_password':
         $authController->resetPassword();
-        exit(); */
+        exit();
 
-    // Pages affichées directement
+    case 'verifyEmail':
+        $authController->verifyEmail();
+        exit();
+
+        //  les pages de la vue
+
     case 'userProfil':
         $page = "user/profil";
         break;
-    case 'verifyEmail':
+    case 'emailVerifyForm':
         $page = "verificationEmail";
         break;
-    case 'register_form':
-        $page = "register";
-        break;
+
     case 'login_form':
         $page = "login";
         break;
-    case 'reeni_page':
+
+    case 'reeni_page':  // Page de demande de réinitialisation du mot de passe
         $page = "reeniEmail";
         break;
+
     case 'dashboard':
         if (!isset($_SESSION['user'])) {
             header("Location: index.php?action=login_form");
@@ -74,13 +71,11 @@ switch ($action) {
         }
         $page = "dashboard";
         break;
+
     default:
         $page = "404"; // Page d'erreur
 }
 
 // Charger le bon layout en fonction du type de page
-if (in_array($action, $authPages)) {
-    require "Views/auth_layout.php";
-} else {
-    require "Views/layout.php";
-}
+$layout = in_array($action, $authPages) ? "Views/auth_layout.php" : "Views/layout.php";
+require $layout;
