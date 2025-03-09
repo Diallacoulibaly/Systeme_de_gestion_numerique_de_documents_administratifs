@@ -24,6 +24,9 @@
 
     <link rel="stylesheet" type="text/css" href="public/assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="public/assets/build/css/style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body

@@ -1,15 +1,16 @@
 <div class="login_wrapper">
     <div class="animate form login_form">
         <section class="login_content">
-            <form method="POST" action="index.php?action=reeni">
+            <form method="POST" action="index.php?action=reset_password">
                 <h1>Réinitialiser votre mot de passe</h1>
+                <input type="hidden" name="token" value="<?php echo htmlspecialchars($_GET['token']); ?>">
                 <div>
-                    <input type="password" name="pass1" class="form-control" placeholder="Nouveau mot de passe"
+                    <input type="password" name="password" class="form-control" placeholder="Nouveau mot de passe"
                         required="" />
                 </div>
                 <div>
-                    <input type="password" name="pass2" class="form-control" placeholder="Confirmer le mot de passe"
-                        required="" />
+                    <input type="password" name="confirmPassword" class="form-control"
+                        placeholder="Confirmer le mot de passe" required="" />
                 </div>
                 <div>
                     <button type="submit" class="btn btn-default submit">Réinitialiser le mot de passe</button>
@@ -23,7 +24,28 @@
                     <p>©2025 All Rights Reserved. IDocsMali
                     </p>
                 </div>
+            </form>
+        </section>
     </div>
-    </form>
-    </section>
-</div>
+
+    <?php if (isset($_SESSION['error'])): ?>
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: '<?php echo $_SESSION['error']; ?>'
+            });
+        </script>
+        <?php unset($_SESSION['error']); ?>
+    <?php endif; ?>
+
+    <?php if (isset($_SESSION['success'])): ?>
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Succès !',
+                text: '<?php echo $_SESSION['success']; ?>'
+            });
+        </script>
+        <?php unset($_SESSION['success']); ?>
+    <?php endif; ?>
