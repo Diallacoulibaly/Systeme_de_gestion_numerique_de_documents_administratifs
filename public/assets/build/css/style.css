@@ -3,7 +3,7 @@ form {
     color: black;
     backdrop-filter: blur(10px);
     padding: 20px;
-    background-color: rgba(218, 181, 18, 0.542);
+    background-color: rgba(173, 216, 230, 0.5);
     border-radius: 10px;      
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
