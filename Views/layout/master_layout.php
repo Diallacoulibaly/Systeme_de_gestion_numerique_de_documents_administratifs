@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="images/favicon.ico" type="image/ico" />
 
-    <title>Gentelella Alela!</title>
+    <title>IDocsMali</title>
     <!-- Je charge les css du template -->
     <!-- Bootstrap -->
     <link href="public/assets/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -29,6 +29,7 @@
 
     <!-- Custom Theme Style -->
     <link href="public/assets/build/css/custom.min.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="public/assets/images/favicon.png">
 
     <!-- Pour le nouveau style -->
     <!-- <link href="public/assets/build/css/style.css" rel="stylesheet"> -->
@@ -130,6 +131,25 @@
     <!-- morris.js -->
     <script src="public/assets/vendors/raphael/raphael.min.js"></script>
     <script src="public/assets/vendors/morris.js/morris.min.js"></script>
+
+    <!-- Datatables -->
+    <script src="public/assets/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="public/assets/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="public/assets/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="public/assets/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script src="public/assets/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="public/assets/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="public/assets/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="public/assets/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="public/assets/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="public/assets/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="public/assets/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script src="public/assets/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+    <script src="public/assets/vendors/jszip/dist/jszip.min.js"></script>
+    <script src="public/assets/vendors/pdfmake/build/pdfmake.min.js"></script>
+    <script src="public/assets/vendors/pdfmake/build/vfs_fonts.js"></script>
+
+
 
 </body>
 

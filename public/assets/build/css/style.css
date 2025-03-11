@@ -3,7 +3,7 @@ form {
     color: black;
     backdrop-filter: blur(10px);
     padding: 20px;
-    background-color: rgba(218, 181, 18, 0.542);
+    background-color: rgba(0, 187, 255, 0.953);
     border-radius: 10px;      
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
@@ -22,10 +22,25 @@ button {
     cursor: pointer;
 }
 
-/*body {
-    background-image: url("/public/assets/images/mairie-du-District.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;                                                   
-    background-attachment: fixed;       
-    background-position: center;                                                                                    
-}*/
+/* Style pour les messages de succès */
+.success {
+    background-color: #4CAF50; /* Vert */
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+    font-size: 16px;
+    text-align: center;
+}
+
+/* Style pour les messages d'erreur */
+.error {
+    background-color: #f44336; /* Rouge */
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+    font-size: 16px;
+    text-align: center;
+
+}

@@ -9,15 +9,15 @@ class User
     {
         $this->db = Database::getInstance();
     }
-    // Methode creer un utilisateur
+
+    //************** Gestion authentification ****************//
+
     public function createUser($nom, $prenom, $adresse, $telephone, $email, $password, $token)
     {
         $stmt = $this->db->prepare("INSERT INTO user (nom, prenom, adresse, telephone, email, password, verifieToken, email_verifie) VALUES (?, ?, ?, ?, ?, ?, ?, 0)");
-        return $stmt->execute([$nom, $prenom, $adresse, $telephone, $email, $password, $token]);
+        return $stmt->execute([$nom, $prenom, $adresse, $telephone, $email, password_hash($password, PASSWORD_DEFAULT), $token]);
     }
 
-
-    // Méthode pour récupérer un utilisateur avec un token spécifique
     public function getUserByToken($token)
     {
         $stmt = $this->db->prepare("SELECT * FROM user WHERE verifieToken = :token");
@@ -26,14 +26,12 @@ class User
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    // Méthode pour activer un utilisateur en mettant à jour son statut
     public function verifyUser($token)
     {
         $stmt = $this->db->prepare("UPDATE user SET email_verifie = 1, verifieToken = NULL WHERE verifieToken = :token");
         $stmt->bindParam(':token', $token, PDO::PARAM_STR);
         return $stmt->execute();
     }
-
 
     public function emailExists($email)
     {
@@ -50,17 +48,17 @@ class User
 
     public function updatePassword($token, $newPassword)
     {
+        $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
         $stmt = $this->db->prepare("UPDATE user SET password = ?, verifieToken = NULL WHERE verifieToken = ?");
-        return $stmt->execute([$newPassword, $token]);
+        return $stmt->execute([$hashedPassword, $token]);
     }
+
     public function deleteResetToken($email)
     {
-        $stmt = $this->db->prepare("UPDATE user SET reset_token = NULL, reset_token = NULL WHERE email = ?");
+        $stmt = $this->db->prepare("UPDATE user SET verifieToken = NULL WHERE email = ?");
         return $stmt->execute([$email]);
     }
 
-
-    // Récupérer un utilisateur par email
     public function getUserByEmail($email)
     {
         $stmt = $this->db->prepare("SELECT * FROM user WHERE email = :email");
@@ -68,18 +66,75 @@ class User
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    //  Mise à jour des informations de l'utilisateur
-    public function updateUser($id, $nom, $prenom, $adresse, $email, $telephone, $photo_profil)
+    //************** Gestion utilisateur ****************//
+
+    public function getRole($userId)
     {
-        $stmt = $this->db->prepare("UPDATE user SET :nom, :prenom, :email, :adresse, :telephone, :photo_profil WHERE id = :id");
-        return $stmt->execute([
-            'nom' => $nom,
-            'prenom' => $prenom,
-            'email' => $email,
-            'adresse' => $adresse,
-            'telephone' => $telephone,
-            'photo_profil' => $photo_profil,
-            'id' => $id
-        ]);
+        $stmt = $this->db->prepare("SELECT role FROM user WHERE id = ?");
+        $stmt->execute([$userId]);
+        return $stmt->fetchColumn();
+    }
+
+    public function getAllUsers()
+    {
+        $stmt = $this->db->query("SELECT id, nom, email, role FROM user");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getUserById($userId)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM user WHERE id = ?");
+        $stmt->execute([$userId]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function updateProfile($id, $nom, $prenom,  $adresse, $email, $telephone, $photo_profil = null)
+    {
+        if ($photo_profil) {
+            $stmt = $this->db->prepare("UPDATE user SET nom = ?, prenom = ?, adresse = ?, email = ?, telephone = ?, photo_profil = ?, updated_at = NOW() WHERE id = ?");
+            return $stmt->execute([$nom, $prenom, $adresse, $email, $telephone, $photo_profil, $id]);
+        } else {
+            $stmt = $this->db->prepare("UPDATE user SET nom = ?, prenom = ?, adresse = ?, email = ?, telephone = ?, updated_at = NOW() WHERE id = ?");
+            return $stmt->execute([$nom, $prenom, $adresse, $email, $telephone, $id]);
+        }
+    }
+
+    public function updateRole($userId, $newRole)
+    {
+        $stmt = $this->db->prepare("UPDATE user SET role = ? WHERE id = ?");
+        return $stmt->execute([$newRole, $userId]);
+    }
+
+    public function updatePasswordProfile($userId, $newPassword)
+    {
+        $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+        $stmt = $this->db->prepare("UPDATE user SET password = ?, updated_at = NOW() WHERE id = ?");
+        return $stmt->execute([$hashedPassword, $userId]);
+    }
+
+    public function logConnexion($userId, $ip_adresse)
+    {
+        $stmt = $this->db->prepare("INSERT INTO historique_connexions (user_id, ip_adresse, date_connexion) VALUES (?, ?, NOW())");
+        return $stmt->execute([$userId, $ip_adresse]);
+    }
+
+    public function logAction($userId, $action)
+    {
+        $stmt = $this->db->prepare("INSERT INTO historique_actions (user_id, action, date_action) VALUES (?, ?, NOW())");
+        return $stmt->execute([$userId, $action]);
+    }
+
+    public function getHistoriqueConnexions($userId)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM historique_connexions WHERE user_id = ? ORDER BY date_connexion DESC");
+        $stmt->execute([$userId]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getHistoriqueActions($userId)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM historique_actions WHERE user_id = ? ORDER BY date_action DESC");
+        $stmt->execute([$userId]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }

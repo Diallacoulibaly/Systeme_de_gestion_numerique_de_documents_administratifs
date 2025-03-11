@@ -7,13 +7,16 @@ if (isset($_SESSION['user']) && (!isset($_GET['action']) || $_GET['action'] == '
     exit();
 }
 
+
 // Inclure les dépendances principales
 require_once 'config/database.php';
 require_once 'core/Router.php';
 require_once 'app/Controllers/AuthController.php';
+require_once 'app/Controllers/UserController.php';
 
 // Initialisation du contrôleur d'authentification
 $authController = new AuthController();
+//$userController = new UserController();
 
 // Récupérer l'action depuis l'URL
 $action = $_GET['action'] ?? 'login_form';
@@ -46,22 +49,31 @@ switch ($action) {
     case 'verifyEmail':
         $authController->verifyEmail();
         exit();
+    case 'change_role':
+        $userController->changeRole();
+        exit();
 
         //  les pages de la vue
 
+    case 'listeUser':
+        $page = "user/liste";
+        break;
+    /* case 'gest':
+        $page = "user/gestionUser";
+        break;
     case 'userProfil':
         $page = "user/profil";
-        break;
+        break; */
     case 'emailVerifyForm':
-        $page = "verificationEmail";
+        $page = "auth/verificationEmail";
         break;
 
     case 'login_form':
-        $page = "login";
+        $page = "auth/login";
         break;
 
     case 'reeni_page':  // Page de demande de réinitialisation du mot de passe
-        $page = "reeniEmail";
+        $page = "auth/reeniEmail";
         break;
 
     case 'dashboard':
@@ -77,5 +89,5 @@ switch ($action) {
 }
 
 // Charger le bon layout en fonction du type de page
-$layout = in_array($action, $authPages) ? "Views/auth_layout.php" : "Views/layout.php";
+$layout = in_array($action, $authPages) ? "Views/layout/auth_layout.php" : "Views/layout/master_layout.php";
 require $layout;

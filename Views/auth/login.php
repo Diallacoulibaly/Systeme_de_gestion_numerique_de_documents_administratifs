@@ -1,10 +1,3 @@
-<?php
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
-?>
-
-
 <div>
     <a class="hiddenanchor" id="signup"></a>
     <a class="hiddenanchor" id="signin"></a>
@@ -105,27 +98,6 @@ if (session_status() == PHP_SESSION_NONE) {
 
 
 
-<?php if (isset($_SESSION['error'])): ?>
-<script>
-Swal.fire({
-    icon: 'error',
-    title: 'Oops...',
-    text: '<?php echo $_SESSION['error']; ?>'
-});
-</script>
-<?php unset($_SESSION['error']); ?>
-<?php endif; ?>
-
-<?php if (isset($_SESSION['success'])): ?>
-<script>
-Swal.fire({
-    icon: 'success',
-    title: 'Succès !',
-    text: '<?php echo $_SESSION['success']; ?>'
-});
-</script>
-<?php unset($_SESSION['success']); ?>
-<?php endif; ?>
 
 
 

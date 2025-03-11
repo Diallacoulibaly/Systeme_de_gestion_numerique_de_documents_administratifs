@@ -1,5 +1,14 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+?>
+
+
+
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -8,7 +17,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Gentelella Alela! | </title>
+    <title>IDocsMali </title>
 
     <!-- Bootstrap -->
     <link href="public/assets/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -22,10 +31,12 @@
     <!-- Custom Theme Style -->
     <link href="public/assets/build/css/custom.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="public/assets/css/style.css">
+    <!--  <link rel="stylesheet" type="text/css" href="public/assets/css/style.css"> -->
     <link rel="stylesheet" type="text/css" href="public/assets/build/css/style.css">
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="icon" type="image" href="public/assets/images/favicon.png">
+
 
 </head>
 
@@ -40,6 +51,29 @@
     }
     ?>
 
+
+
+    <?php if (isset($_SESSION['error'])): ?>
+    <script>
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: '<?php echo $_SESSION['error']; ?>'
+    });
+    </script>
+    <?php unset($_SESSION['error']); ?>
+    <?php endif; ?>
+
+    <?php if (isset($_SESSION['success'])): ?>
+    <script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Succès !',
+        text: '<?php echo $_SESSION['success']; ?>'
+    });
+    </script>
+    <?php unset($_SESSION['success']); ?>
+    <?php endif; ?>
 </body>
 
 </html>

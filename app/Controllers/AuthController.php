@@ -154,7 +154,7 @@ class AuthController
             if ($user['email_verifie'] == 0) {
                 $_SESSION['error'] = "Votre compte n'est pas encore activé. Veuillez vérifier votre email.";
                 header("Location: index.php?action=login_form");
-                die();
+                exit();
             }
 
             // Vérifier le mot de passe
@@ -293,7 +293,7 @@ class AuthController
                 }
             }
 
-            if ($this->userModel->updateUser($id, $nom, $prenom, $adresse, $email, $telephone, $photo_profil)) {
+            if ($this->userModel->updateProfile($id, $nom, $prenom, $adresse, $email, $telephone, $photo_profil)) {
                 $_SESSION['user']['nom'] = $nom;
                 $_SESSION['user']['prenom'] = $prenom;
                 $_SESSION['user']['adresse'] = $adresse;
