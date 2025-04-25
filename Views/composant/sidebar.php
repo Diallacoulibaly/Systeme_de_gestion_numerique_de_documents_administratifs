@@ -5,7 +5,7 @@
         <ul class="nav side-menu">
             <li><a href="index.php?action=dashboard"><i class="fa fa-home"></i> Home</span></a>
             </li>
-            <li><a><i class="fa fa-user"></i> Gestion Utilisateur <span class="fa fa-chevron-down"></span></a>
+            <li><a><i class="fa fa-users"></i> Gestion Utilisateur <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
                     <li><a href="index.php?action=listeUser">Liste des utilisateurs</a></li>
                     <li><a href="index2.html">Ajouter un utilisateur</a></li>
@@ -26,19 +26,12 @@
                 <ul class="nav child_menu">
                     <li><a href="general_elements.html">General Elements</a></li>
                     <li><a href="media_gallery.html">Media Gallery</a></li>
-                    <li><a href="typography.html">Typography</a></li>
-                    <li><a href="icons.html">Icons</a></li>
-                    <li><a href="glyphicons.html">Glyphicons</a></li>
-                    <li><a href="widgets.html">Widgets</a></li>
-                    <li><a href="invoice.html">Invoice</a></li>
-                    <li><a href="inbox.html">Inbox</a></li>
-                    <li><a href="calendar.html">Calendar</a></li>
                 </ul>
             </li>
             <li><a><i class="fa fa-table"></i> Demandes <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
-                    <li><a href="tables.html">Tables</a></li>
-                    <li><a href="tables_dynamic.html">Table Dynamic</a></li>
+                    <li><a href="tables.html">Liste des demandes</a></li>
+                    <li><a href="tables_dynamic.html">Demande en Cours</a></li>
                 </ul>
             </li>
             <li><a><i class="fa fa-bar-chart-o"></i> Statistiques <span class="fa fa-chevron-down"></span></a>

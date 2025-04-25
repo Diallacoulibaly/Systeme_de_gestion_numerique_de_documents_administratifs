@@ -77,7 +77,7 @@ class User
 
     public function getAllUsers()
     {
-        $stmt = $this->db->query("SELECT id, nom, email, role FROM user");
+        $stmt = $this->db->query("SELECT * FROM user");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 

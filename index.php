@@ -58,12 +58,17 @@ switch ($action) {
     case 'listeUser':
         $page = "user/liste";
         break;
-    /* case 'gest':
+    case 'gest':
         $page = "user/gestionUser";
         break;
+
+    // Gestion du profil
     case 'userProfil':
         $page = "user/profil";
-        break; */
+        break;
+    case 'editProfil':
+        $page = "user/editProfil";
+        break;
     case 'emailVerifyForm':
         $page = "auth/verificationEmail";
         break;
@@ -85,7 +90,7 @@ switch ($action) {
         break;
 
     default:
-        $page = "404"; // Page d'erreur
+        require("views/erreur/404.php"); // Page d'erreur
 }
 
 // Charger le bon layout en fonction du type de page

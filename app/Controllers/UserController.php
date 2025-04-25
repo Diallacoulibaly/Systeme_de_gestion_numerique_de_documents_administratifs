@@ -12,7 +12,7 @@ class UserController
         }
     }
 
-    // 🔹 Mise à jour du profil utilisateur
+    //  Mise à jour du profil utilisateur
     public function updateProfile()
     {
         if ($_SERVER['REQUEST_METHOD'] === "POST") {
@@ -161,5 +161,11 @@ class UserController
             header("Location: index.php?action=dashboard");
             exit();
         }
+    }
+    public function userList()
+    {
+        $users = $this->userModel->getAllUsers();
+        var_dump($users);
+        include("view/user/liste.php");
     }
 }

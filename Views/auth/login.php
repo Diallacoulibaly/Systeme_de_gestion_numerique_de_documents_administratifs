@@ -25,7 +25,7 @@
 
                     <div class="separator">
                         <p class="change_link">Vous-etes nouveau ?
-                            <a href="#signup" class="to_register"> Creeer un compte </a>
+                            <a href="#signup" class="to_register"> Créer un compte </a>
                         </p>
 
                         <div class="clearfix"></div>
