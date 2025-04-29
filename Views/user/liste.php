@@ -1,4 +1,9 @@
 <!-- page content -->
+<?php
+require_once __DIR__ . '/../../app/Controllers/notificationController.php';
+$notifier = new notificationController();
+$notifier->sendSMS("+22391000000", "Votre demande est validée !");
+?>
 <div class="right_col" role="main">
     <div class="">
         <div class="page-title">

@@ -14,7 +14,7 @@ class User
 
     public function createUser($nom, $prenom, $adresse, $telephone, $email, $password, $token)
     {
-        $stmt = $this->db->prepare("INSERT INTO user (nom, prenom, adresse, telephone, email, password, verifieToken, email_verifie) VALUES (?, ?, ?, ?, ?, ?, ?, 0)");
+        $stmt = $this->db->prepare("INSERT INTO user (nom, prenom, adresse, telephone, email, password, verifieToken, email_verifie, role) VALUES (?, ?, ?, ?, ?, ?, ?, 0, 'citoyen')");
         return $stmt->execute([$nom, $prenom, $adresse, $telephone, $email, password_hash($password, PASSWORD_DEFAULT), $token]);
     }
 
@@ -28,7 +28,7 @@ class User
 
     public function verifyUser($token)
     {
-        $stmt = $this->db->prepare("UPDATE user SET email_verifie = 1, verifieToken = NULL WHERE verifieToken = :token");
+        $stmt = $this->db->prepare("UPDATE `user` SET email_verifie = 1, verifieToken = NULL WHERE verifieToken = :token");
         $stmt->bindParam(':token', $token, PDO::PARAM_STR);
         return $stmt->execute();
     }
@@ -42,20 +42,20 @@ class User
 
     public function storeResetToken($email, $token)
     {
-        $stmt = $this->db->prepare("UPDATE user SET verifieToken = ? WHERE email = ?");
+        $stmt = $this->db->prepare("UPDATE `user` SET verifieToken = ? WHERE email = ?");
         return $stmt->execute([$token, $email]);
     }
 
     public function updatePassword($token, $newPassword)
     {
         $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-        $stmt = $this->db->prepare("UPDATE user SET password = ?, verifieToken = NULL WHERE verifieToken = ?");
+        $stmt = $this->db->prepare("UPDATE `user` SET password = ?, verifieToken = NULL WHERE verifieToken = ?");
         return $stmt->execute([$hashedPassword, $token]);
     }
 
     public function deleteResetToken($email)
     {
-        $stmt = $this->db->prepare("UPDATE user SET verifieToken = NULL WHERE email = ?");
+        $stmt = $this->db->prepare("UPDATE `user` SET verifieToken = NULL WHERE email = ?");
         return $stmt->execute([$email]);
     }
 
@@ -91,24 +91,24 @@ class User
     public function updateProfile($id, $nom, $prenom,  $adresse, $email, $telephone, $photo_profil = null)
     {
         if ($photo_profil) {
-            $stmt = $this->db->prepare("UPDATE user SET nom = ?, prenom = ?, adresse = ?, email = ?, telephone = ?, photo_profil = ?, updated_at = NOW() WHERE id = ?");
+            $stmt = $this->db->prepare("UPDATE `user` SET nom = ?, prenom = ?, adresse = ?, email = ?, telephone = ?, photo_profil = ?, updated_at = NOW() WHERE id = ?");
             return $stmt->execute([$nom, $prenom, $adresse, $email, $telephone, $photo_profil, $id]);
         } else {
-            $stmt = $this->db->prepare("UPDATE user SET nom = ?, prenom = ?, adresse = ?, email = ?, telephone = ?, updated_at = NOW() WHERE id = ?");
+            $stmt = $this->db->prepare("UPDATE `user` SET nom = ?, prenom = ?, adresse = ?, email = ?, telephone = ?, updated_at = NOW() WHERE id = ?");
             return $stmt->execute([$nom, $prenom, $adresse, $email, $telephone, $id]);
         }
     }
 
     public function updateRole($userId, $newRole)
     {
-        $stmt = $this->db->prepare("UPDATE user SET role = ? WHERE id = ?");
+        $stmt = $this->db->prepare("UPDATE `user` SET role = ? WHERE id = ?");
         return $stmt->execute([$newRole, $userId]);
     }
 
     public function updatePasswordProfile($userId, $newPassword)
     {
         $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-        $stmt = $this->db->prepare("UPDATE user SET password = ?, updated_at = NOW() WHERE id = ?");
+        $stmt = $this->db->prepare("UPDATE `user` SET password = ?, updated_at = NOW() WHERE id = ?");
         return $stmt->execute([$hashedPassword, $userId]);
     }
 

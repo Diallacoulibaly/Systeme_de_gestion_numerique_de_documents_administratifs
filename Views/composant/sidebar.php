@@ -5,6 +5,7 @@
         <ul class="nav side-menu">
             <li><a href="index.php?action=dashboard"><i class="fa fa-home"></i> Home</span></a>
             </li>
+            <?php if ($_SESSION['user']['role'] === 'admin'): ?>
             <li><a><i class="fa fa-users"></i> Gestion Utilisateur <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
                     <li><a href="index.php?action=listeUser">Liste des utilisateurs</a></li>
@@ -12,6 +13,7 @@
                     <li><a href="index3.html">Dashboard3</a></li>
                 </ul>
             </li>
+            <?php endif; ?>
             <li><a><i class="fa fa-edit"></i> Documents <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
                     <li><a href="form.html">Actes de naissance</a></li>
