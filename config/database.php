@@ -4,7 +4,7 @@ define('DB_NAME', 'mairie');
 define('DB_USER', 'root');
 define('DB_PASS', '');
 
-define('BASE_URL', 'http://localhost/projetTutorer/iDocsMali/index.php?');
+define('BASE_URL', 'http://localhost/ProjetIDocsMali/index.php?');
 
 
 define('SMTP_HOST', 'smtp.gmail.com'); // Serveur SMTP (ex: smtp.gmail.com, smtp.mailtrap.io)
