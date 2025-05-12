@@ -11,7 +11,6 @@ if (isset($_SESSION['user']) && (!isset($_GET['action']) || $_GET['action'] == '
 require_once 'config/database.php';
 require_once 'core/Router.php';
 require_once 'app/Controllers/AuthController.php';
-
 // Initialisation du contrôleur d'authentification
 $authController = new AuthController();
 

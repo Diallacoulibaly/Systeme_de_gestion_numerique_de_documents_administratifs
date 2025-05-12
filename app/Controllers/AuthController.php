@@ -100,7 +100,7 @@ class AuthController
                     $_SESSION['error'] = "Échec de l'envoi de l'email.";
                 }
             }
-            // Réinitialiser les données du formulaire après un succès mais je garde l'email pour afficher sur login
+            // Réinitialise les données du formulaire après un succès mais  garde l'email pour afficher sur login
             unset($_SESSION['nom']);
             unset($_SESSION['prenom']);
             unset($_SESSION['telephone']);
